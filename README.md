@@ -36,9 +36,10 @@ Main shopping features for our customers. Access to product catalog showing all 
 
 [gif goes here]
 
-### Detail Display of a given luxury watch
+### Displaying Detail of a given luxury watch
 
-[short description goes here]
+Contain high-quality information and visuals containing the image of the watch, watch description (material, brand story, features), customer reviews and star ratings.
+
 
 [gif goes here]
 
