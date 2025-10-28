@@ -40,6 +40,9 @@ Main shopping features for our customers. Access to product catalog showing all 
 
 Contain high-quality information and visuals containing the image of the watch, watch description (material, brand story, features), customer reviews and star ratings.
 
+## Brand Experience
+
+Displaying a premium aesthetic with a minimalist UI for the website with smooth animations, fast loading and page transitions, and elegant text.
 
 [gif goes here]
 
