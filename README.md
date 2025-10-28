@@ -1,20 +1,20 @@
-# [your app name here]
+# 🕰️ Timeless Luxe
 
 CodePath WEB103 Final Project
 
-Designed and developed by: [your names here]
+Designed and developed by: Salah and Mikita
 
-🔗 Link to deployed app:
+🔗 Link to deployed app: 
 
 ## About
 
 ### Description and Purpose
 
-[text goes here]
+Timeless Luxe is a modern and elegant web application designed to showcase and sell premium watches online. The purpose of this website is to provide customers with an easy-to-use shopping experience. 
 
 ### Inspiration
 
-[text goes here]
+The inspiration behind Timeless Luxe comes from the appreciation of fine craftsmanship and timeless design found in luxury watches. We wanted to create a digital space that mirrors the sophistication and precision of high-end watchmaking. The project also provides luxury branding with an intuitive usability structure.
 
 ## Tech Stack
 
