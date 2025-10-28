@@ -24,19 +24,19 @@ Backend:
 
 ## Features
 
-### [Name of Feature 1]
+### User Account
 
-[short description goes here]
-
-[gif goes here]
-
-### [Name of Feature 2]
-
-[short description goes here]
+Personalized account for the user. Displays name, email, saved shopping items and possible browsing history.
 
 [gif goes here]
 
-### [Name of Feature 3]
+### Product Browsing - (Luxury Watches)
+
+Main shopping features for our customers. Access to product catalog showing all watches while being able to filter by brand, price, or style. In addition, our customers can sort watchhes by their popularity (ratings), and price. Also there would be a search bar for a specific watch. 
+
+[gif goes here]
+
+### Detail Display of a given luxury watch
 
 [short description goes here]
 
