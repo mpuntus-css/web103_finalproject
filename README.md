@@ -32,7 +32,7 @@ Personalized account for the user. Displays name, email, saved shopping items an
 
 ### Product Browsing - (Luxury Watches)
 
-Main shopping features for our customers. Access to product catalog showing all watches while being able to filter by brand, price, or style. In addition, our customers can sort watchhes by their popularity (ratings), and price. Also there would be a search bar for a specific watch. 
+Main shopping features for our customers. Access to a product catalog showing all watches while being able to filter by brand, price, or style. In addition, our customers can sort watchhes by their popularity (ratings), and price. Also, there would be a search bar for a specific watch. 
 
 [gif goes here]
 
@@ -40,9 +40,23 @@ Main shopping features for our customers. Access to product catalog showing all 
 
 Contain high-quality information and visuals containing the image of the watch, watch description (material, brand story, features), customer reviews and star ratings.
 
+[gif goes here]
+
 ## Brand Experience
 
 Displaying a premium aesthetic with a minimalist UI for the website with smooth animations, fast loading and page transitions, and elegant text.
+
+[gif goes here]
+
+## Wishlist & Favorites
+
+Allows users to save their favorite watches to a personalized wishlist for future viewing or purchase. This feature helps customers keep track of watches they love and easily revisit them later without needing to search again.
+
+[gif goes here]
+
+## Featured Collections
+
+Highlights special collections such as “New Arrivals,” “Best Sellers,” or “Limited Editions” on the homepage. This helps customers quickly discover popular or exclusive watches and makes browsing more engaging.
 
 [gif goes here]
 
