@@ -18,9 +18,9 @@ The inspiration behind Timeless Luxe comes from the appreciation of fine craftsm
 
 ## Tech Stack
 
-Frontend:
+Frontend: React + JS
 
-Backend:
+Backend: Node + Express + PostgreSQL (DB on Render)
 
 ## Features
 
