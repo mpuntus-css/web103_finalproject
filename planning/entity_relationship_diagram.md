@@ -9,5 +9,4 @@ List of Tables: User, Brand, Review, Wishlist, Watch
 ## Add the Entity Relationship Diagram
 
 
-
-
+![ERD Diagram]('entity.png')
