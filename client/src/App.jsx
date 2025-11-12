@@ -1,17 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Router, Route, Routes} from 'react-router-dom'
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import Detail from "./pages/Detail";
+import Account from "./pages/Account";
+import { sampleWatches } from "./data/watches";
+import "./styles.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [cart, setCart] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
+
+  const addToCart = (id) => setCart((prev) => [...prev, id]);
+  const addToWishlist = (id) => setWishlist((prev) => [...new Set([...prev, id])]);
+  const removeFromWishlist = (id) => setWishlist((prev) => prev.filter((x) => x !== id));
+
+  const wishlistItems = wishlist.map((id) =>
+    sampleWatches.find((w) => w.id === id)
+  ).filter(Boolean);
 
   return (
-    <>
-    </>
-    
-  )
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home watches={sampleWatches} onAddToCart={addToCart} onSaveWishlist={addToWishlist} />} />
+        <Route path="/detail/:id" element={<Detail onAddToCart={addToCart} />} />
+        <Route path="/account" element={<Account wishlist={wishlistItems} onRemove={removeFromWishlist} />} />
+      </Routes>
+      <Footer />
+    </Router>
+  );
 }
 
-export default App
+export default App;

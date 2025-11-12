@@ -1,0 +1,394 @@
+/* === GLOBAL STYLES === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Cormorant Garamond", "Playfair Display", serif;
+  background-color: #0a0a0a;
+  color: #e8e8e8;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+/* === HEADER === */
+.wg-header {
+  background-color: #0a0a0a;
+  border-bottom: 1px solid #222;
+  padding: 1.5rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wg-logo a {
+  font-weight: 400;
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+  color: #d4af37;
+  text-transform: uppercase;
+}
+
+.wg-nav {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.wg-nav a {
+  font-weight: 400;
+  font-size: 0.95rem;
+  color: #e8e8e8;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.wg-nav a:hover {
+  color: #d4af37;
+}
+
+/* === FOOTER === */
+.wg-footer {
+  background-color: #0a0a0a;
+  border-top: 1px solid #222;
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.85rem;
+  color: #888;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.wg-footer div:first-child {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.75rem;
+}
+
+/* === HOME PAGE (GRID) === */
+.wg-container {
+  padding: 2rem 3rem 4rem;
+  min-height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+}
+
+.wg-hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.wg-hero h1 {
+  font-size: 4rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  color: #e8e8e8;
+}
+
+.wg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  flex: 1;
+  align-content: start;
+}
+
+.wg-card {
+  background: #0a0a0a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.wg-card:hover {
+  transform: translateY(-5px);
+  border-color: #d4af37;
+}
+
+.wg-image {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 1.5rem;
+  background: radial-gradient(circle, #1a1a1a 0%, #0a0a0a 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wg-title {
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  color: #e8e8e8;
+}
+
+.wg-price {
+  font-size: 1.1rem;
+  color: #d4af37;
+  margin-bottom: 1.5rem;
+}
+
+.wg-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.wg-link {
+  color: #d4af37;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.wg-link:hover {
+  color: #bfa14a;
+}
+
+.wg-cta {
+  background-color: #d4af37;
+  color: #0a0a0a;
+  border: none;
+  border-radius: 4px;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background-color 0.3s ease;
+}
+
+.wg-cta:hover {
+  background-color: #bfa14a;
+}
+
+.wg-cta.big {
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.wg-save {
+  background: none;
+  border: 1px solid #333;
+  color: #e8e8e8;
+  font-size: 1.2rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.wg-save:hover {
+  border-color: #d4af37;
+  color: #d4af37;
+}
+
+.wg-empty {
+  text-align: center;
+  padding: 3rem;
+  color: #888;
+  font-size: 1.1rem;
+}
+
+/* === DETAIL PAGE === */
+.wg-detail {
+  max-width: 1200px;
+}
+
+.wg-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.wg-detail-image {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: radial-gradient(circle, #1a1a1a 0%, #0a0a0a 100%);
+  border: 1px solid #333;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wg-detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.wg-detail-title {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: #e8e8e8;
+  letter-spacing: 1px;
+}
+
+.wg-detail-price {
+  font-size: 1.5rem;
+  color: #d4af37;
+}
+
+.wg-detail-desc {
+  color: #b8b8b8;
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.wg-specs {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.wg-specs th,
+.wg-specs td {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #222;
+  text-align: left;
+}
+
+.wg-specs th {
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+.wg-specs td {
+  color: #e8e8e8;
+  font-size: 0.95rem;
+}
+
+/* Related watches section */
+.wg-related {
+  margin-top: 4rem;
+  border-top: 1px solid #222;
+  padding-top: 2rem;
+}
+
+.wg-related h3 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+}
+
+.wg-related-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.wg-related-card {
+  background: #0a0a0a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  transition: border-color 0.3s ease;
+}
+
+.wg-related-card:hover {
+  border-color: #d4af37;
+}
+
+.wg-related-card .wg-image {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 1rem;
+}
+
+.wg-related-card h4 {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #e8e8e8;
+  margin-bottom: 0.3rem;
+}
+
+.wg-related-card .price {
+  font-size: 0.9rem;
+  color: #d4af37;
+}
+
+/* === ACCOUNT PAGE (WISHLIST) === */
+.wg-wishlist {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.wg-wishlist h2 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #d4af37;
+  text-transform: uppercase;
+}
+
+.wishlist-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #222;
+  padding: 1rem 0;
+}
+
+.wishlist-item img {
+  width: 80px;
+  border-radius: 8px;
+  margin-right: 1rem;
+}
+
+.wishlist-item .details {
+  flex: 1;
+}
+
+.wishlist-item .details h4 {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+.wishlist-item .remove-btn {
+  color: #d4af37;
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.wishlist-item .remove-btn:hover {
+  color: #bfa14a;
+}
