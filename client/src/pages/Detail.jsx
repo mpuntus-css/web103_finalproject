@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { sampleWatches } from "../data/watches";
 import "./Detail.css";
 
@@ -44,6 +44,7 @@ function Detail({ onAddToCart }) {
               <div className="wg-image" aria-hidden></div>
               <h4>{w.name}</h4>
               <div className="price">{w.price}</div>
+              <Link className="wg-link" to={`/detail/${w.id}`}>View</Link>
             </div>
           ))}
         </div>
