@@ -2,9 +2,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 3rem;
+  min-height: 100px; /* stable header height */
+  padding: 1.25rem 3rem;
   background: #0a0a0a;
   border-bottom: 1px solid #222;
+  box-sizing: border-box;
+  flex: 0 0 auto; /* never shrink */
 }
 
 .wg-logo a {
@@ -14,11 +17,13 @@
   letter-spacing: 0.15em;
   color: #d4af37;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .wg-nav {
   display: flex;
   gap: 2.5rem;
+  flex-shrink: 0;
 }
 
 .wg-nav a {
@@ -28,6 +33,7 @@
   color: #fff;
   text-decoration: none;
   transition: color 0.3s;
+  white-space: nowrap;
 }
 
 .wg-nav a:hover {

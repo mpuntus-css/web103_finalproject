@@ -1,12 +1,16 @@
 .wg-footer {
   text-align: center;
-  padding: 2rem 1rem;
+  /* Fixed height to avoid compression */
+  height: 100px;
+  flex: 0 0 100px;
+  padding: 1.25rem 1rem; /* fit content within fixed height */
   background: #0a0a0a;
   border-top: 1px solid #222;
   color: #888;
   font-size: 0.85rem;
   letter-spacing: 0.1em;
   margin-top: auto;
+  box-sizing: border-box;
 }
 
 .wg-footer div:first-child {

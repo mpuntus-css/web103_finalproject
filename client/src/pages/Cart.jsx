@@ -1,14 +1,14 @@
-import "./Account.css";
+import "./Cart.css";
 
-function Account({ wishlist, onRemove }) {
+function Cart({ cart, onRemove }) {
   return (
     <main className="wg-container">
-      <h1 className="wg-page-title">Your Wishlist</h1>
-      {wishlist.length === 0 ? (
-        <div className="wg-empty">Your wishlist is empty.</div>
+      <h1 className="wg-page-title">Your Cart</h1>
+      {cart.length === 0 ? (
+        <div className="wg-empty">Your cart is empty.</div>
       ) : (
         <div className="wg-grid">
-          {wishlist.map((w) => (
+          {cart.map((w) => (
             <div key={w.id} className="wg-card">
               <div className="wg-image" aria-hidden></div>
               <h3 className="wg-title">{w.name}</h3>
@@ -20,6 +20,6 @@ function Account({ wishlist, onRemove }) {
       )}
     </main>
   );
-};
+}
 
-export default Account;
+export default Cart;
