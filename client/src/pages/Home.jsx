@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
+import "./Home.css";
 
-export default function Home({ watches, onAddToCart, onSaveWishlist }) {
+function Home({ watches, onAddToCart, onSaveWishlist }) {
   return (
     <main className="wg-container">
       <section className="wg-hero">
@@ -22,11 +23,11 @@ export default function Home({ watches, onAddToCart, onSaveWishlist }) {
         ))}
       </section>
 
-      <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-        <button className="wg-cta big" style={{ maxWidth: '300px', margin: '0 auto' }}>
-          Shop All
-        </button>
+      <div className="wg-shop-all-container">
+        <button className="wg-cta big">Shop All</button>
       </div>
     </main>
   );
-}
+};
+
+export default Home;

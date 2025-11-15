@@ -1,0 +1,147 @@
+.wg-hero {
+  text-align: center;
+  padding: 3rem 0;
+  margin-bottom: 2rem;
+}
+
+.wg-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: #fff;
+  margin: 0;
+}
+
+.wg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  flex: 1;
+  align-content: start;
+}
+
+.wg-card {
+  background: #0f0f0f;
+  border: 1px solid #222;
+  border-radius: 4px;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s, border-color 0.3s;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.wg-card:hover {
+  transform: translateY(-5px);
+  border-color: #d4af37;
+}
+
+.wg-image {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 1rem;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  border-radius: 50%;
+  border: 2px solid #333;
+}
+
+.wg-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  margin: 0;
+  color: #fff;
+}
+
+.wg-price {
+  font-size: 1.25rem;
+  color: #d4af37;
+  font-weight: 500;
+  margin: 0.5rem 0;
+}
+
+.wg-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.wg-link {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background: transparent;
+  border: 1px solid #d4af37;
+  color: #d4af37;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  transition: all 0.3s;
+  border-radius: 2px;
+}
+
+.wg-link:hover {
+  background: #d4af37;
+  color: #000;
+}
+
+.wg-cta {
+  padding: 0.6rem 1.5rem;
+  background: #d4af37;
+  border: 1px solid #d4af37;
+  color: #000;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+.wg-cta:hover {
+  background: transparent;
+  color: #d4af37;
+}
+
+.wg-cta.big {
+  padding: 1rem 3rem;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.wg-save {
+  background: transparent;
+  border: 1px solid #444;
+  color: #d4af37;
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.wg-save:hover {
+  border-color: #d4af37;
+  transform: scale(1.1);
+}
+
+.wg-shop-all-container {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.wg-shop-all-container .wg-cta.big {
+  max-width: 300px;
+  margin: 0 auto;
+}

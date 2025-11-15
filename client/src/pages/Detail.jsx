@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import { sampleWatches } from "../data/watches";
+import "./Detail.css";
 
-export default function Detail({ onAddToCart }) {
+function Detail({ onAddToCart }) {
   const { id } = useParams();
   const watch = sampleWatches.find((w) => w.id === id);
 
@@ -49,4 +50,6 @@ export default function Detail({ onAddToCart }) {
       </section>
     </main>
   );
-}
+};
+
+export default Detail;

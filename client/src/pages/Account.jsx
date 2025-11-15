@@ -1,4 +1,6 @@
-export default function Account({ wishlist, onRemove }) {
+import "./Account.css";
+
+function Account({ wishlist, onRemove }) {
   return (
     <main className="wg-container">
       <section className="wg-wishlist">
@@ -20,4 +22,6 @@ export default function Account({ wishlist, onRemove }) {
       </section>
     </main>
   );
-}
+};
+
+export default Account;

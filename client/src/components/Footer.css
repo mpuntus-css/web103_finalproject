@@ -1,0 +1,28 @@
+.wg-footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: #0a0a0a;
+  border-top: 1px solid #222;
+  color: #888;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  margin-top: auto;
+}
+
+.wg-footer div:first-child {
+  margin-bottom: 0.75rem;
+}
+
+.wg-footer a {
+  color: #d4af37;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.wg-footer a:hover {
+  color: #fff;
+}
+
+.wg-footer span {
+  color: #888;
+}

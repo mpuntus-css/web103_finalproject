@@ -1,8 +1,18 @@
-export default function Footer() {
+import "./Footer.css";
+
+function Footer() {
   return (
     <footer className="wg-footer">
-      <div>CONTACT · INSTAGRAM · FACEBOOK</div>
-      <div>© {new Date().getFullYear()} WATCHGUYS</div>
+      <div>
+        <a href="#">CONTACT</a>
+        <span> · </span>
+        <a href="#" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+        <span> · </span>
+        <a href="#" target="_blank" rel="noopener noreferrer">FACEBOOK</a>
+      </div>
+      <div>© {new Date().getFullYear()} TIMELESS LUXE</div>
     </footer>
   );
-}
+};
+
+export default Footer;

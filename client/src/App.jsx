@@ -26,7 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home watches={sampleWatches} onAddToCart={addToCart} onSaveWishlist={addToWishlist} />} />
         <Route path="/detail/:id" element={<Detail onAddToCart={addToCart} />} />
-        <Route path="/account" element={<Account wishlist={wishlistItems} onRemove={removeFromWishlist} />} />
+        <Route path="/wishlist" element={<Account wishlist={wishlistItems} onRemove={removeFromWishlist} />} />
       </Routes>
       <Footer />
     </Router>
