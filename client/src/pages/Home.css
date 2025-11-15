@@ -136,6 +136,16 @@
   transform: scale(1.1);
 }
 
+.wg-save.in-wishlist {
+  color: #ff4444;
+  border-color: #ff4444;
+}
+
+.wg-save.in-wishlist:hover {
+  border-color: #ff6666;
+  color: #ff6666;
+}
+
 .wg-shop-all-container {
   text-align: center;
   margin-top: 3rem;

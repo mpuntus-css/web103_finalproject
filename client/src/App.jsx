@@ -15,6 +15,13 @@ function App() {
   const addToCart = (id) => setCart((prev) => [...prev, id]);
   const addToWishlist = (id) => setWishlist((prev) => [...new Set([...prev, id])]);
   const removeFromWishlist = (id) => setWishlist((prev) => prev.filter((x) => x !== id));
+  const toggleWishlist = (id) => {
+    if (wishlist.includes(id)) {
+      removeFromWishlist(id);
+    } else {
+      addToWishlist(id);
+    }
+  };
 
   const wishlistItems = wishlist.map((id) =>
     sampleWatches.find((w) => w.id === id)
@@ -24,7 +31,7 @@ function App() {
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element={<Home watches={sampleWatches} onAddToCart={addToCart} onSaveWishlist={addToWishlist} />} />
+        <Route path="/" element={<Home watches={sampleWatches} onAddToCart={addToCart} onToggleWishlist={toggleWishlist} wishlist={wishlist} />} />
         <Route path="/detail/:id" element={<Detail onAddToCart={addToCart} />} />
         <Route path="/wishlist" element={<Account wishlist={wishlistItems} onRemove={removeFromWishlist} />} />
       </Routes>
