@@ -10,11 +10,51 @@ import { sampleWatches } from "./data/watches";
 import "./styles.css";
 
 function App() {
+  // Cart now stores objects with id and quantity: { id: number, quantity: number }
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
+  const [notification, setNotification] = useState(null);
 
-  const addToCart = (id) => setCart((prev) => [...prev, id]);
-  const removeFromCart = (id) => setCart((prev) => prev.filter((x) => x !== id));
+  const showNotification = (message) => {
+    setNotification(message);
+    setTimeout(() => setNotification(null), 750);
+  };
+
+  const addToCart = (id) => {
+    setCart((prev) => {
+      const existingItem = prev.find(item => item.id === id);
+      if (existingItem) {
+        // Increment quantity if item already exists
+        return prev.map(item => 
+          item.id === id 
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        // Add new item with quantity 1
+        return [...prev, { id, quantity: 1 }];
+      }
+    });
+    showNotification("Watch has been added to the cart");
+  };
+
+  const removeFromCart = (id) => {
+    setCart((prev) => {
+      const existingItem = prev.find(item => item.id === id);
+      if (existingItem && existingItem.quantity > 1) {
+        // Decrement quantity if more than 1
+        return prev.map(item =>
+          item.id === id
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        );
+      } else {
+        // Remove item completely if quantity is 1
+        return prev.filter(item => item.id !== id);
+      }
+    });
+  };
+
   const addToWishlist = (id) => setWishlist((prev) => [...new Set([...prev, id])]);
   const removeFromWishlist = (id) => setWishlist((prev) => prev.filter((x) => x !== id));
   const toggleWishlist = (id) => {
@@ -29,13 +69,16 @@ function App() {
     sampleWatches.find((w) => w.id === id)
   ).filter(Boolean);
 
-  const cartItems = cart.map((id) =>
-    sampleWatches.find((w) => w.id === id)
-  ).filter(Boolean);
+  // Map cart items to include watch data and quantity
+  const cartItems = cart.map(({ id, quantity }) => {
+    const watch = sampleWatches.find((w) => w.id === id);
+    return watch ? { ...watch, quantity } : null;
+  }).filter(Boolean);
 
   return (
     <Router>
       <Header />
+      {notification && <div className="notification">{notification}</div>}
       <Routes>
         <Route path="/" element={<Home watches={sampleWatches} onAddToCart={addToCart} onToggleWishlist={toggleWishlist} wishlist={wishlist} />} />
         <Route path="/detail/:id" element={<Detail onAddToCart={addToCart} />} />

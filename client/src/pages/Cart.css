@@ -1,1 +1,58 @@
 /* Cart page styles reuse .wg-page-title from Account.css and global .wg-empty */
+
+.wg-quantity {
+  font-size: 0.95rem;
+  color: #d4af37;
+  font-weight: 500;
+  padding: 0.5rem;
+  background: rgba(212, 175, 55, 0.1);
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+.cart-summary {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: #0f0f0f;
+  border: 1px solid #222;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #333;
+}
+
+.total-label {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: #fff;
+}
+
+.total-amount {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #d4af37;
+  letter-spacing: 0.05em;
+}
+
+.purchase-btn {
+  width: 100%;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+}
