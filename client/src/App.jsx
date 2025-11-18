@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -6,7 +6,8 @@ import Home from "./pages/Home";
 import Detail from "./pages/Detail";
 import Account from "./pages/Account";
 import Cart from "./pages/Cart";
-import { sampleWatches } from "./data/watches";
+import { AuthProvider } from "./context/AuthContext";
+import { watchAPI } from "./services/api";
 import "./styles.css";
 
 function App() {
@@ -14,6 +15,49 @@ function App() {
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
   const [notification, setNotification] = useState(null);
+  const [watches, setWatches] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [hasMore, setHasMore] = useState(true);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+
+  useEffect(() => {
+    fetchWatches();
+  }, []);
+
+  const fetchWatches = async (append = false) => {
+    try {
+      if (append) {
+        setIsLoadingMore(true);
+      } else {
+        setLoading(true);
+      }
+      
+      const offset = append ? watches.length : 0;
+      const data = await watchAPI.getAll(20, offset);
+      
+      if (append) {
+        setWatches(prev => [...prev, ...data.watches]);
+      } else {
+        setWatches(data.watches);
+      }
+      
+      setHasMore(data.hasMore);
+      setError(null);
+    } catch (err) {
+      console.error('Failed to fetch watches:', err);
+      setError('Failed to load watches. Please try again later.');
+    } finally {
+      setLoading(false);
+      setIsLoadingMore(false);
+    }
+  };
+
+  const loadMoreWatches = () => {
+    if (!isLoadingMore && hasMore) {
+      fetchWatches(true);
+    }
+  };
 
   const showNotification = (message) => {
     setNotification(message);
@@ -66,27 +110,46 @@ function App() {
   };
 
   const wishlistItems = wishlist.map((id) =>
-    sampleWatches.find((w) => w.id === id)
+    watches.find((w) => w.id === id)
   ).filter(Boolean);
 
   // Map cart items to include watch data and quantity
   const cartItems = cart.map(({ id, quantity }) => {
-    const watch = sampleWatches.find((w) => w.id === id);
+    const watch = watches.find((w) => w.id === id);
     return watch ? { ...watch, quantity } : null;
   }).filter(Boolean);
 
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <p>Loading watches...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="error-container">
+        <p>{error}</p>
+        <button onClick={fetchWatches}>Retry</button>
+      </div>
+    );
+  }
+
   return (
-    <Router>
-      <Header />
-      {notification && <div className="notification">{notification}</div>}
-      <Routes>
-        <Route path="/" element={<Home watches={sampleWatches} onAddToCart={addToCart} onToggleWishlist={toggleWishlist} wishlist={wishlist} />} />
-        <Route path="/detail/:id" element={<Detail onAddToCart={addToCart} />} />
-        <Route path="/wishlist" element={<Account wishlist={wishlistItems} onRemove={removeFromWishlist} />} />
-        <Route path="/cart" element={<Cart cart={cartItems} onRemove={removeFromCart} />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Header />
+        {notification && <div className="notification">{notification}</div>}
+        <Routes>
+          <Route path="/" element={<Home watches={watches} onAddToCart={addToCart} onToggleWishlist={toggleWishlist} wishlist={wishlist} onLoadMore={loadMoreWatches} hasMore={hasMore} isLoadingMore={isLoadingMore} />} />
+          <Route path="/detail/:id" element={<Detail watches={watches} onAddToCart={addToCart} />} />
+          <Route path="/wishlist" element={<Account wishlist={wishlistItems} onRemove={removeFromWishlist} />} />
+          <Route path="/cart" element={<Cart cart={cartItems} onRemove={removeFromCart} />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </AuthProvider>
   );
 }
 
