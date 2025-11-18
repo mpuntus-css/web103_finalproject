@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../hooks/useAuth.js";
 import "./Header.css";
 
 function Header() {
   const { user, isAuthenticated, login, logout, loading } = useAuth();
+
+  console.log("User on header:", user);
+
 
   return (
     <header className="wg-header">
@@ -14,6 +17,7 @@ function Header() {
         <Link to="/">Home</Link>
         <Link to="/wishlist">Wishlist</Link>
         <Link to="/cart">Cart</Link>
+        <Link to="/login">Log in</Link>
         {!loading && (
           <>
             {isAuthenticated ? (
@@ -22,7 +26,7 @@ function Header() {
                 <button onClick={logout} className="auth-button">Logout</button>
               </div>
             ) : (
-              <button onClick={login} className="auth-button">Login with GitHub</button>
+              <button onClick={() => login({OAuthProvider: true})} className="auth-button">Login with GitHub</button>
             )}
           </>
         )}

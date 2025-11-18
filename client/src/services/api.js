@@ -32,14 +32,34 @@ export const authAPI = {
   login: () => {
     window.location.href = `${API_BASE_URL}/auth/github`;
   },
-  
-  logout: async () => {
-    const response = await fetch(`${API_BASE_URL}/auth/logout`, {
-      credentials: 'include'
+  signupWithEmail: async (email, password, name) => {
+    const response = await fetch(`${API_BASE_URL}/auth/signup`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ email, password, name })
     });
-    if (!response.ok) throw new Error('Failed to logout');
+    if (!response.ok) return { success: false, user: null };
     return response.json();
+  },
+  loginWithEmail: async (email, password) => {
+    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ email, password })
+    });
+    if (!response.ok) return { success: false, user: null };
+    return response.json();
+   }, 
+  
+   logout: async () => {
+    return fetch(`${API_BASE_URL}/auth/logout`, {
+      method: "POST",
+      credentials: "include"
+    });
   }
+  
 };
 
 // User endpoints
@@ -87,12 +107,14 @@ export const wishlistAPI = {
 // Review endpoints
 export const reviewAPI = {
   getByWatch: async (watchId) => {
-    const response = await fetch(`${API_BASE_URL}/reviews/watch/${watchId}`, {
+    const response = await fetch(`${API_BASE_URL}/reviews/watch/${String(watchId).trim()}`, {
       credentials: 'include'
-    });
+    });    
     if (!response.ok) throw new Error('Failed to fetch reviews');
     return response.json();
   },
+
+  
   
   create: async (reviewData) => {
     const response = await fetch(`${API_BASE_URL}/reviews`, {

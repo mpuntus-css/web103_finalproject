@@ -1,48 +1,91 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { authAPI } from '../services/api';
 
-const AuthContext = createContext(null);
+// eslint-disable-next-line react-refresh/only-export-components
+export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+
+  // Separate loading states
+  const [authLoading, setAuthLoading] = useState(false);    // initial login check
+  const [actionLoading, setActionLoading] = useState(false); // signup/login buttons
 
   useEffect(() => {
     checkLoginStatus();
   }, []);
 
-  const checkLoginStatus = async () => {
+  const signup = async ({ name, email, password }) => {
+    setActionLoading(true);
     try {
-      const data = await authAPI.checkLoginStatus();
-      if (data.success && data.user) {
-        setUser(data.user);
+      const res = await authAPI.signupWithEmail(email, password, name);
+      if (res && res.success) {
+        setUser(res.user);
+        return true;
       }
-    } catch (error) {
-      console.error('Failed to check login status:', error);
+      return false;
+    } catch (err) {
+      console.error("Signup error:", err);
+      return false;
     } finally {
-      setLoading(false);
+      setActionLoading(false);
     }
   };
 
-  const login = () => {
-    authAPI.login();
+  const checkLoginStatus = async () => {
+    setAuthLoading(true);
+    try {
+      const res = await authAPI.checkLoginStatus();
+      if (res.success) setUser(res.user);
+      else setUser(null);
+    } catch (err) {
+      console.error("Auth check failed:", err);
+      setUser(null);
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
+  const login = async ({ email, password, OAuthProvider }) => {
+    setActionLoading(true);
+    try {
+      let data = OAuthProvider
+        ? await authAPI.login()
+        : await authAPI.loginWithEmail(email, password);
+
+      if (data.success && data.user) {
+        setUser(data.user);
+        return true;
+      }
+      return false;
+    } catch (err) {
+      console.error("Login Error: ", err);
+      return false;
+    } finally {
+      setActionLoading(false);
+    }
   };
 
   const logout = async () => {
+    setActionLoading(true);
     try {
       await authAPI.logout();
       setUser(null);
     } catch (error) {
       console.error('Failed to logout:', error);
+    } finally {
+      setActionLoading(false);
     }
   };
 
   const value = {
     user,
-    loading,
+    isAuthenticated: !!user,
+    authLoading,
+    actionLoading,
+    signup,
     login,
-    logout,
-    isAuthenticated: !!user
+    logout
   };
 
   return (
@@ -50,12 +93,4 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within AuthProvider');
-  }
-  return context;
 };

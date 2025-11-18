@@ -2,20 +2,23 @@ import { pool } from '../config/database.js'
 
 
 export const createReview = async (req, res) => {
-    const { user_id, watch_id, rating, review_description } = req.body;
-    try {
-        const result = await pool.query(`
-            INSERT INTO reviews (user_id, watch_id, rating, review_description)
-            VALUES ($1, $2, $3, $4)
-            RETURNING *;
-            `, [user_id, watch_id, rating, review_description]);
-        res.status(201).json(result.rows[0])
-    } catch (err) {
-        console.error('Error creating review for user: ',err);
-        res.status(500).send({error: "ISR creation"});
+    const { watch_id, content, rating, user_id } = req.body;
+    if (!watch_id || !content || !user_id) {
+      return res.status(400).json({ success: false, message: "Missing fields" });
     }
-
-}
+  
+    try {
+      const result = await pool.query(
+        "INSERT INTO reviews (watch_id, user_id, rating, review_description) VALUES ($1, $2, $3, $4) RETURNING *",
+        [watch_id, user_id, rating, content]
+      );
+      res.json({ success: true, review: result.rows[0] });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, message: "Server error" });
+    }
+};
+  
 
 export const getReviews = async (req, res) => {
     try {

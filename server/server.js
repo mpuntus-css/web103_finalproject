@@ -8,8 +8,9 @@ import brandRoute from "./routes/brandRoute.js"
 import authRoutes from './routes/auth.js'
 import passport from "passport";
 import session from "express-session";
-import { Github } from "./config/auth.js";
+import { Github, Local } from "./config/auth.js";
 import { pool } from "./config/database.js"; 
+
 
 
 const app = express();
@@ -22,7 +23,7 @@ app.use(cors({
     credentials: true
 }))
 
-app.use(express.json())
+app.use(express.json());
 
 app.use(session({
     secret: 'luxe-timeless',
@@ -36,6 +37,7 @@ app.use(passport.session())
 
 
 passport.use(Github)
+passport.use(Local)
 
 
 passport.serializeUser((user, done) => {

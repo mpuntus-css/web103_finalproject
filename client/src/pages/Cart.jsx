@@ -3,8 +3,10 @@ import "./Cart.css";
 function Cart({ cart, onRemove }) {
   // Calculate total price accounting for quantity
   const total = cart.reduce((sum, watch) => {
-    const price = parseFloat(watch.price.replace(/[^0-9.-]+/g, ""));
-    return sum + (price * watch.quantity);
+    const price = typeof watch.price === "string"
+    ? parseFloat(watch.price.replace(/[^0-9.-]+/g, ""))
+    : watch.price;
+      return sum + (price * watch.quantity);
   }, 0);
 
   const handlePurchase = () => {

@@ -1,6 +1,9 @@
 import passport from "passport"
 import { Strategy as GitHubStrategy } from 'passport-github2';
+import { Strategy as LocalStrategy } from 'passport-local';
 import { pool } from '../config/database.js'
+import bcrypt from 'bcrypt';
+
 
 
 const options = {
@@ -49,6 +52,24 @@ const verifyUser = async (accessToken, refreshToken, profile, done) => {
     }
 
 }
+
+export const Local = new LocalStrategy(
+    { usernameField: 'email' }, 
+    async (email, password, done) => {
+      try {
+        const res = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+        const user = res.rows[0];
+        if (!user) return done(null, false, { message: 'Incorrect email' });
+  
+        const validPassword = await bcrypt.compare(password, user.password_hash);
+        if (!validPassword) return done(null, false, { message: 'Incorrect password' });
+  
+        return done(null, user);
+      } catch (err) {
+        return done(err);
+      }
+    }
+);
 
 
 export const Github = new GitHubStrategy(options, verifyUser)

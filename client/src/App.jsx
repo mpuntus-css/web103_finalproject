@@ -6,9 +6,12 @@ import Home from "./pages/Home";
 import Detail from "./pages/Detail";
 import Account from "./pages/Account";
 import Cart from "./pages/Cart";
-import { AuthProvider } from "./context/AuthContext";
+import Login from "./pages/Login.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
 import { watchAPI } from "./services/api";
 import "./styles.css";
+import Signup from "./pages/Signup.jsx";
+import Reviews from "./pages/Reviews.jsx";
 
 function App() {
   // Cart now stores objects with id and quantity: { id: number, quantity: number }
@@ -35,6 +38,8 @@ function App() {
       
       const offset = append ? watches.length : 0;
       const data = await watchAPI.getAll(20, offset);
+      console.log("WATCHES RESPONSE:", data);
+
       
       if (append) {
         setWatches(prev => [...prev, ...data.watches]);
@@ -146,6 +151,9 @@ function App() {
           <Route path="/detail/:id" element={<Detail watches={watches} onAddToCart={addToCart} />} />
           <Route path="/wishlist" element={<Account wishlist={wishlistItems} onRemove={removeFromWishlist} />} />
           <Route path="/cart" element={<Cart cart={cartItems} onRemove={removeFromCart} />} />
+          <Route path="/login" element={<Login></Login>}/>
+          <Route path="/signup" element={<Signup></Signup>}/>
+          <Route path="/reviews/:id" element={<Reviews></Reviews>}/>
         </Routes>
         <Footer />
       </Router>

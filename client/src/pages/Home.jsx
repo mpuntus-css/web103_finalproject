@@ -25,13 +25,18 @@ function Home({ watches, onAddToCart, onToggleWishlist, wishlist = [], onLoadMor
               <div className="wg-actions">
                 <Link className="wg-link" to={`/detail/${w.id}`}>View</Link>
                 <button className="wg-cta" onClick={() => onAddToCart(w.id)}>Add to Cart</button>
-                <button 
-                  className={`wg-save ${isInWishlist ? 'in-wishlist' : ''}`} 
-                  onClick={() => onToggleWishlist(w.id)}
-                  title={isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
-                >
-                  {isInWishlist ? '♥' : '♡'}
-                </button>
+                <div className="wg-secondary-actions">
+                    <button 
+                      className={`wg-save ${isInWishlist ? 'in-wishlist' : ''}`} 
+                      onClick={() => onToggleWishlist(w.id)}
+                      title={isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
+                    >
+                      {isInWishlist ? '♥' : '♡'}
+                    </button>
+                    <Link className="wg-cta reviews-btn" to={`/reviews/${w.id}`}>
+                      Reviews
+                    </Link>
+                  </div>
               </div>
             </article>
           );

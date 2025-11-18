@@ -24,7 +24,7 @@ const createUsersTable = async () => {
         
     }
 }
-const alterUsersTable = async () => {
+const alterTable = async () => {
     try {
         await pool.query(`
             ALTER TABLE users 
@@ -38,7 +38,12 @@ const alterUsersTable = async () => {
             ALTER TABLE users 
             ALTER COLUMN password_hash DROP NOT NULL;
         `);
-        console.log("🔧 Users Table Altered (github_id ensured)");
+        await pool.query(`
+            ALTER TABLE reviews ALTER COLUMN rating DROP NOT NULL;
+
+            `)
+
+        console.log("🔧 Tables Altered (github_id ensured)");
     } catch (err) {
         console.error("Users Table ALTER failed:", err);
     }
@@ -97,7 +102,7 @@ const createReviewsTable = async () => {
         id serial PRIMARY KEY,
         watch_id integer NOT NULL,
         user_id integer NOT NULL,
-        rating integer NOT NULL,
+        rating integer,
         review_description text NOT NULL,
         created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (watch_id) REFERENCES watches(id),
@@ -137,7 +142,7 @@ const createWishlistTable = async () => {
 
 const initalize_insertDB = async () => {
     await createUsersTable();
-    await alterUsersTable();
+    await alterTable();
     await createBrandsTable();
     await createWatchesTable();
     await createReviewsTable();

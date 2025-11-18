@@ -1,0 +1,120 @@
+/* src/pages/Login.css */
+
+/* Container */
+.login-container {
+    max-width: 400px;
+    margin: 80px auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Heading */
+  .login-container h1 {
+    text-align: center;
+    margin-bottom: 24px;
+    color: #333;
+  }
+  
+  /* Form */
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .login-form label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .login-form input {
+    padding: 10px 12px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+  }
+  
+  .login-form input:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  /* Buttons */
+  .login-button,
+  .github-button {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .login-button {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .login-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .github-button {
+    background-color: #24292e;
+    color: #fff;
+  }
+  
+  .github-button:hover {
+    background-color: #1b1f23;
+  }
+  
+  /* Divider */
+  .oauth-divider {
+    text-align: center;
+    margin: 20px 0;
+    font-weight: bold;
+    color: #888;
+  }
+  
+  /* Error message */
+  .error {
+    background-color: #ffe6e6;
+    color: #d8000c;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  /* Signup text */
+  .signup-text {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .signup-text a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .signup-text a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive */
+  @media (max-width: 500px) {
+    .login-container {
+      margin: 40px 20px;
+      padding: 30px 20px;
+    }
+  }
+  
