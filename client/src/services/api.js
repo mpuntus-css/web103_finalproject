@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || "https://web103-finalproject-gzz2.onrender.com/api";
+const API_BASE_URL = "https://web103-finalproject-gzz2.onrender.com/api";
 
 // Watch endpoints
 export const watchAPI = {

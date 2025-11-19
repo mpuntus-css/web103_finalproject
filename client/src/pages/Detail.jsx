@@ -32,7 +32,7 @@ function Detail({ onAddToCart, watches = [] }) {
   };
 
   async function addToWishlist(watch_id, user_id) {
-    const res = await fetch("http://localhost:3000/api/wishlists", {
+    const res = await fetch("https://web103-finalproject-gzz2.onrender.com/api/wishlists", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
