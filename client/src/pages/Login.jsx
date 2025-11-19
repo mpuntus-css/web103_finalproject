@@ -20,7 +20,7 @@ function Login () {
   
   // GitHub OAuth login
   const handleGitHubLogin = () => {
-    window.location.href = "http://localhost:3000/api/auth/github";
+    window.location.href = "https://web103-finalproject-gzz2.onrender.com/api/auth/github";
   };
 
   return (

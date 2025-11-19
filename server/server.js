@@ -17,21 +17,30 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+
 app.use(cors({
     origin: 'https://client-c4by.onrender.com',
-    methods: ['GET,POST,PUT,DELETE,PATCH'],
-    credentials: true
-}))
+    credentials: true,
+  }));
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+
+  
 app.use(session({
-    secret: 'luxe-timeless',
+    secret: process.env.SESSION_SECRET || 'luxe-timeless',
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false }
-}))
-
+    cookie: { 
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      httpOnly: true
+    }
+  }));
+  
+  
+  
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -65,6 +74,8 @@ app.use("/api/watches", watchRoute);
 app.use("/api/reviews", reviewRoute);
 app.use("/api/wishlists", wishlistRoute);
 app.use("/api/brands", brandRoute)
+
+console.log("Mounting /api/auth routes");
 app.use('/api/auth', authRoutes)
 
 

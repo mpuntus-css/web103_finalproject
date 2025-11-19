@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || "https://web103-finalproject-gzz2.onrender.com/api";
+const API_BASE_URL = "https://web103-finalproject-gzz2.onrender.com/api";
 
 // Watch endpoints
 export const watchAPI = {
@@ -33,15 +33,19 @@ export const authAPI = {
     window.location.href = `${API_BASE_URL}/auth/github`;
   },
   signupWithEmail: async (email, password, name) => {
+    console.log("Signup request:", { email, name }); 
+    console.log("Calling URL:", `${API_BASE_URL}/auth/signup`);
     const response = await fetch(`${API_BASE_URL}/auth/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
       body: JSON.stringify({ email, password, name })
     });
+    console.log("Response status:", response.status);
     if (!response.ok) return { success: false, user: null };
     return response.json();
   },
+  
   loginWithEmail: async (email, password) => {
     const response = await fetch(`${API_BASE_URL}/auth/login`, {
       method: "POST",

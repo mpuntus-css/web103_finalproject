@@ -14,6 +14,9 @@ router.get('/login/success', (req, res) => {
     }
 })
 
+console.log("Auth routes loaded"); 
+
+
 router.post('/signup', async (req, res) => {
 
     const { name, email, password } = req.body;
