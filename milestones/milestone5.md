@@ -82,6 +82,7 @@ Complete the checklist below detailing each baseline, custom, and stretch featur
 
 🔗 [Here's a GIF walkthrough of the final project](👉🏾👉🏾👉🏾 your link here)
 
+![Features](../projectGIF_Final.gif)
 
 ## Reflection
 
