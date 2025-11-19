@@ -79,9 +79,10 @@ router.get(
 
 router.get(
     '/github/callback',
-    passport.authenticate('github', { failureRedirect: 'http://localhost:5173/login' }),
+    passport.authenticate('github', { failureRedirect: 'https://client-c4by.onrender.com/login' }),
     (req, res) => {
-        res.redirect('http://localhost:5173');
+        res.redirect('https://client-c4by.onrender.com');
+
     }
 );
 

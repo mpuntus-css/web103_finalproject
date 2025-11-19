@@ -26,6 +26,10 @@ function App() {
   const [hasMore, setHasMore] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
+
+  const API_URL = import.meta.env.PROD ? '{YOUR_SERVER_URL}' : '/api';
+
+
   const {user, isAuthenticated} = useAuth();
 
   useEffect(() => {

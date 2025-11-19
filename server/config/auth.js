@@ -9,7 +9,7 @@ import bcrypt from 'bcrypt';
 const options = {
     clientID: process.env.OAUTH_CLIENTID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: 'http://localhost:3000/api/auth/github/callback'
+    callbackURL: 'https://web103-finalproject-gzz2.onrender.com/api/auth/github/callback'
 }
 
 const verifyUser = async (accessToken, refreshToken, profile, done) => {

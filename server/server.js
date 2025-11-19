@@ -18,7 +18,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://web103-finalproject-gzz2.onrender.com',
     methods: ['GET,POST,PUT,DELETE,PATCH'],
     credentials: true
 }))
