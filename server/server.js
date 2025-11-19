@@ -74,6 +74,8 @@ app.use("/api/watches", watchRoute);
 app.use("/api/reviews", reviewRoute);
 app.use("/api/wishlists", wishlistRoute);
 app.use("/api/brands", brandRoute)
+
+console.log("Mounting /api/auth routes");
 app.use('/api/auth', authRoutes)
 
 
