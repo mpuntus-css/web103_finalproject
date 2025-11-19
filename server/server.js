@@ -17,21 +17,27 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+
 app.use(cors({
     origin: 'https://client-c4by.onrender.com',
-    methods: ['GET,POST,PUT,DELETE,PATCH'],
-    credentials: true
-}))
+    credentials: true,
+  }));
 
 app.use(express.json());
 
-app.use(session({
-    secret: 'luxe-timeless',
+  
+  app.use(session({
+    secret: process.env.SESSION_SECRET || 'luxe-timeless',
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false }
-}))
-
+    cookie: { 
+      secure: true,       
+      sameSite: 'none',  
+      httpOnly: true
+    }
+  }));
+  
+  
 app.use(passport.initialize())
 app.use(passport.session())
 
