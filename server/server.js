@@ -18,7 +18,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors({
-    origin: 'https://web103-finalproject-gzz2.onrender.com',
+    origin: 'https://client-c4by.onrender.com',
     methods: ['GET,POST,PUT,DELETE,PATCH'],
     credentials: true
 }))
