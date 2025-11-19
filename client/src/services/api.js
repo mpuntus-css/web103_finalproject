@@ -76,7 +76,7 @@ export const userAPI = {
 // Wishlist endpoints
 export const wishlistAPI = {
   getAll: async (userId) => {
-    const response = await fetch(`${API_BASE_URL}/wishlists/${userId}`, {
+    const response = await fetch(`${API_BASE_URL}/wishlists/user/${userId}`, {
       credentials: 'include'
     });
     if (!response.ok) throw new Error('Failed to fetch wishlist');
@@ -103,6 +103,7 @@ export const wishlistAPI = {
     return response.json();
   }
 };
+
 
 // Review endpoints
 export const reviewAPI = {

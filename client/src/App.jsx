@@ -12,6 +12,8 @@ import { watchAPI } from "./services/api";
 import "./styles.css";
 import Signup from "./pages/Signup.jsx";
 import Reviews from "./pages/Reviews.jsx";
+import { useAuth } from "./hooks/useAuth.js";
+import { wishlistAPI } from "./services/api";
 
 function App() {
   // Cart now stores objects with id and quantity: { id: number, quantity: number }
@@ -23,6 +25,8 @@ function App() {
   const [error, setError] = useState(null);
   const [hasMore, setHasMore] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+
+  const {user, isAuthenticated} = useAuth();
 
   useEffect(() => {
     fetchWatches();
@@ -104,15 +108,70 @@ function App() {
     });
   };
 
-  const addToWishlist = (id) => setWishlist((prev) => [...new Set([...prev, id])]);
-  const removeFromWishlist = (id) => setWishlist((prev) => prev.filter((x) => x !== id));
-  const toggleWishlist = (id) => {
-    if (wishlist.includes(id)) {
-      removeFromWishlist(id);
-    } else {
-      addToWishlist(id);
+  async function loadWishlist() {
+    if (!user) return;
+    try {
+      const data = await wishlistAPI.getAll(user.id);
+      setWishlist(data);
+    } catch (err) {
+      console.error("Failed to load wishlist:", err);
+    }
+  }
+  
+  async function handleAddToWishlist(watchId) {
+    if (!user) {
+      alert("Please log in to save items.");
+      return;
+    }
+    try {
+      await wishlistAPI.add(user.id, watchId);
+      await loadWishlist();  // refresh
+    } catch (err) {
+      console.error("Failed to add wishlist:", err);
+    }
+  }
+  
+  async function handleRemoveWishlist(id) {
+    try {
+      await wishlistAPI.remove(id);
+      await loadWishlist(); // refresh
+    } catch (err) {
+      console.error("Failed to remove wishlist:", err);
+    }
+  }
+
+  const handleToggleWishlist = async (watchId) => {
+    const currentUser = user;
+  
+    if (!currentUser) {
+      alert("Please log in to save items.");
+      return;
+    }
+  
+    const isInWishlist = wishlist.includes(watchId);
+  
+    // Optimistic UI update
+    setWishlist(prev =>
+      isInWishlist ? prev.filter(id => id !== watchId) : [...prev, watchId]
+    );
+  
+    try {
+      if (isInWishlist) {
+        await wishlistAPI.remove(watchId); // remove from DB
+      } else {
+        await wishlistAPI.add(currentUser.id, watchId); // add to DB
+      }
+    } catch (err) {
+      console.error("Wishlist update failed:", err);
+      // revert on failure
+      setWishlist(prev =>
+        isInWishlist ? [...prev, watchId] : prev.filter(id => id !== watchId)
+      );
     }
   };
+  
+  
+
 
   const wishlistItems = wishlist.map((id) =>
     watches.find((w) => w.id === id)
@@ -147,9 +206,10 @@ function App() {
         <Header />
         {notification && <div className="notification">{notification}</div>}
         <Routes>
-          <Route path="/" element={<Home watches={watches} onAddToCart={addToCart} onToggleWishlist={toggleWishlist} wishlist={wishlist} onLoadMore={loadMoreWatches} hasMore={hasMore} isLoadingMore={isLoadingMore} />} />
-          <Route path="/detail/:id" element={<Detail watches={watches} onAddToCart={addToCart} />} />
-          <Route path="/wishlist" element={<Account wishlist={wishlistItems} onRemove={removeFromWishlist} />} />
+          <Route path="/" element={<Home watches={watches} onAddToCart={addToCart} onToggleWishlist={handleToggleWishlist} wishlist={wishlist} onLoadMore={loadMoreWatches} hasMore={hasMore} isLoadingMore={isLoadingMore} />} />
+          <Route path="/detail/:id" element={<Detail watches={watches} onAddToCart={addToCart} onAddToWishlist={handleAddToWishlist}/>}/>
+
+          <Route path="/wishlist" element={<Account wishlist={wishlistItems} onRemove={handleRemoveWishlist} />} />
           <Route path="/cart" element={<Cart cart={cartItems} onRemove={removeFromCart} />} />
           <Route path="/login" element={<Login></Login>}/>
           <Route path="/signup" element={<Signup></Signup>}/>
@@ -162,3 +222,4 @@ function App() {
 }
 
 export default App;
+

@@ -1,6 +1,23 @@
 import "./Account.css";
 
-function Account({ wishlist, onRemove }) {
+import { useEffect } from "react";
+import { wishlistAPI } from "../services/api";
+import { useAuth } from "../hooks/useAuth";
+
+function Account({ wishlist, setWishlist, onRemove }) {
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      loadWishlist();
+    }
+  }, [user]);
+
+  const loadWishlist = async () => {
+    const data = await wishlistAPI.getAll(user.id);
+    setWishlist(data);
+  };
+
   return (
     <main className="wg-container">
       <h1 className="wg-page-title">Your Wishlist</h1>
@@ -13,13 +30,15 @@ function Account({ wishlist, onRemove }) {
               <div className="wg-image" aria-hidden></div>
               <h3 className="wg-title">{w.name}</h3>
               <div className="wg-price">{w.price}</div>
-              <button className="wg-cta" onClick={() => onRemove(w.id)}>Remove</button>
+              <button className="wg-cta" onClick={() => onRemove(w.id)}>
+                Remove
+              </button>
             </div>
           ))}
         </div>
       )}
     </main>
   );
-};
+}
 
 export default Account;

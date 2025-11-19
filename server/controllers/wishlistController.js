@@ -3,6 +3,8 @@ import { pool } from '../config/database.js'
 export const createWishlistItem = async (req, res) => {
     try {
         const { user_id, watch_id } = req.body;
+        console.log("REQUEST BODY =>", req.body);
+
 
         const result = await pool.query(`
             INSERT INTO wishlists (user_id, watch_id)

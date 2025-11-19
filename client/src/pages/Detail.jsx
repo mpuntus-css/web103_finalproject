@@ -1,5 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useAuth } from "../hooks/useAuth";
+
 import { watchAPI } from "../services/api";
 import "./Detail.css";
 
@@ -8,6 +10,7 @@ function Detail({ onAddToCart, watches = [] }) {
   const [watch, setWatch] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { user, isAuthenticated} = useAuth();
 
   useEffect(() => {
     fetchWatch();
@@ -27,6 +30,19 @@ function Detail({ onAddToCart, watches = [] }) {
       setLoading(false);
     }
   };
+
+  async function addToWishlist(watch_id, user_id) {
+    const res = await fetch("http://localhost:3000/api/wishlists", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ watch_id, user_id }),
+    });
+  
+    const data = await res.json();
+    console.log("Added to wishlist:", data);
+  }
+  
 
   if (loading) {
     return <main className="wg-container">Loading watch details...</main>;
@@ -89,6 +105,7 @@ function Detail({ onAddToCart, watches = [] }) {
                   {typeof w.price === 'number' ? `$${w.price.toLocaleString()}` : w.price}
                 </div>
                 <Link className="wg-link" to={`/detail/${w.id}`}>View</Link>
+                <button className='wg-link' onClick={() => addToWishlist(w.id, user.id)}>Add to Wishlist</button>
               </div>
             ))}
           </div>
