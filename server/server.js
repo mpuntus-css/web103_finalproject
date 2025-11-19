@@ -24,18 +24,21 @@ app.use(cors({
   }));
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
   
-  app.use(session({
+app.use(session({
     secret: process.env.SESSION_SECRET || 'luxe-timeless',
     resave: false,
     saveUninitialized: false,
     cookie: { 
-      secure: true,       
-      sameSite: 'none',  
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       httpOnly: true
     }
   }));
+  
   
   
 app.use(passport.initialize())
