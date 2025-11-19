@@ -4,7 +4,8 @@ CodePath WEB103 Final Project
 
 Designed and developed by: Salah and Mikita
 
-🔗 Link to deployed app: 
+🔗 Link to deployed app: https://client-c4by.onrender.com
+Server Link (If needed): https://web103-finalproject-gzz2.onrender.com
 
 ## About
 
